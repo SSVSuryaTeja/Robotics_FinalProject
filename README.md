@@ -12,6 +12,7 @@ Metal and Plastic detecting Robot using IR and Inductive Proximity Sensors
 
 Image:
 
+![Alt Text](//imgur.com/8KN1PsG)
 <blockquote class="imgur-embed-pub" lang="en" data-id="a/8KN1PsG"><a href="//imgur.com/8KN1PsG"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 #Projects Members:
