@@ -10,15 +10,11 @@ Metal and Plastic detecting Robot using IR and Inductive Proximity Sensors
 - we have DC motors to run conveyor chain.
 - Used Regulated power supply for DC Voltage and Current.
 
-Image:
-
-![Robot Image](https://imgur.com/a/5yZOoLJ)
-
 # Projects Members:
--Arifa
--Divesh
--Manojna
--Surya
+- Arifa
+- Divesh
+- Manojna
+- Surya
 
 # Note:
 - We have several issues while driving motors for conveyor belt. The DC motors produced low torques which is insufficent to run the conveyor,However we can acheive by using DC motors with high torque. as a remedy we hava manually operated the conveyor.
