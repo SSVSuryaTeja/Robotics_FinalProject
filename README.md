@@ -10,7 +10,7 @@ Metal and Plastic detecting Robot using Captive and Inductive Sensors
 - Used Regulated power supply for DC Voltage and Current.
 
 Projects Members:
-1)Arifa
-2)Divesh
-3)Manojna
-4)Surya
+-Arifa
+-Divesh
+-Manojna
+-Surya
