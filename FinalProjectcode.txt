@@ -1,210 +1,217 @@
-float metalDetected;
-int monitoring;
-int metalDetection = A1;
-const int IR_Sensor= A2;
-
- //motor1
- int ena1 = 11;
- int m1inp1 = 42;
- int m1inp2 = 43;
- //robot2motor1
- int rena1 = 10;
- int rm1inp1 = 38;
- int rm1inp2 = 39;
- //motor3
- int ena3 = 9;
- int m3inp1 = 34;
- int m3inp2 = 35;
- //robot2motor3
- int rena3 = 6;
- int rm3inp1 = 30;
- int rm3inp2 = 31;
- //motor5
- int ena5 = 5;
- int m5inp1 = 26;
- int m5inp2 = 27;
- //robot2motor5
- int rena5 = 3;
- int rm5inp1 = 40;
- int rm5inp2 = 41;
-
- //conveyer
- //int conveyinp1 = 22;
- //int conveyinp2 = 23;
- //int cen=4;
- 
-void setup(){
-Serial.begin(9600);
- pinMode(ena1, OUTPUT);
-  pinMode(rena1, OUTPUT);
-  pinMode(ena3, OUTPUT);
-  pinMode(rena3, OUTPUT);
-  pinMode(ena5, OUTPUT);
-  pinMode(rena5, OUTPUT);
-  pinMode(cen, OUTPUT);
-  pinMode(m1inp1, OUTPUT);
-  pinMode(m1inp2, OUTPUT);
-  pinMode(rm1inp1, OUTPUT);
-  pinMode(rm1inp2, OUTPUT);
-  pinMode(m3inp1, OUTPUT);
-  pinMode(m3inp2, OUTPUT);
-  pinMode(rm3inp1, OUTPUT);
-  pinMode(rm3inp2, OUTPUT);
-  pinMode(m5inp1, OUTPUT);
-  pinMode(m5inp2, OUTPUT);
-  pinMode(rm5inp1, OUTPUT);
-  pinMode(rm5inp2, OUTPUT);
-  pinMode(conveyinp1, OUTPUT);
-  pinMode(conveyinp2, OUTPUT);
-  pinMode(metalDetection, INPUT);
-  pinMode(13, OUTPUT);
-  pinMode(IR_Sensor,INPUT);
-  //digitalWrite(conveyinp1, HIGH);
-  //digitalWrite(conveyinp2, LOW);
-  analogWrite(cen, 180);
-}
-
-void loop() {
-delay(300);
-monitoring = analogRead(metalDetection);
-Serial.println(monitoring);
-
-//Serial.println("%");
-if (monitoring < 250)
-{
-  //digitalWrite(conveyinp1, LOW);
-  //digitalWrite(conveyinp2, LOW);
-  analogWrite(cen, 0);
-  Serial.println("Metal is Detected");
-  digitalWrite(m3inp1, LOW);
-  digitalWrite(m3inp2, HIGH);
-  analogWrite(ena3, 180);
-  delay(500);              //down
-  digitalWrite(m3inp1, LOW);
-  digitalWrite(m3inp2, LOW);
-  analogWrite(ena3, 0);
-  delay(400);
-  digitalWrite(m1inp1, HIGH);
-  digitalWrite(m1inp2, LOW);
-  analogWrite(ena1, 180);
-  delay(600);//grab
-  digitalWrite(m1inp1, LOW);
-  digitalWrite(m1inp2, LOW);
-  analogWrite(ena1, 0);
-  delay(400);
-  digitalWrite(m3inp1, HIGH);
-  digitalWrite(m3inp2, LOW);
-  analogWrite(ena3, 180);
-  delay(700);//up
-  digitalWrite(m3inp1, LOW);
-  digitalWrite(m3inp2, LOW);
-  analogWrite(ena3, 0);
-  delay(400);
-  digitalWrite(m5inp1, LOW);
-  digitalWrite(m5inp2, HIGH);
-  analogWrite(ena5, 180);
-  delay(2500);//rotate right
-  digitalWrite(m5inp1, LOW);
-  digitalWrite(m5inp2, LOW);
-  analogWrite(ena5, 0);
-  delay(400);
-  digitalWrite(m1inp1, LOW);
-  digitalWrite(m1inp2, HIGH);
-  analogWrite(ena1, 180);
-  delay(600);//open
-  digitalWrite(m1inp1, LOW);
-  digitalWrite(m1inp2, LOW);
-  analogWrite(ena1, 0);
-  delay(400);
-  digitalWrite(m5inp1, HIGH);
-  digitalWrite(m5inp2, LOW);
-  analogWrite(ena5, 180);
-  delay(2500);//rotate left
-  digitalWrite(m5inp1, LOW);
-  digitalWrite(m5inp2, LOW);
-  analogWrite(ena5, 0);
-  delay(400);
-}
-if(AnalogRead(IR_Sensor)<225)      //Check the sensor output
-{
- Serial.println("Plastic is detected");
-  digitalWrite(conveyinp1, LOW);
-  digitalWrite(conveyinp2, LOW);
-  analogWrite(cen, 0);
-  digitalWrite(rm3inp1, LOW);
-  digitalWrite(rm3inp2, HIGH);
-  analogWrite(rena3, 180);
-  delay(700);              //down
-  digitalWrite(rm3inp1, LOW);
-  digitalWrite(rm3inp2, LOW);
-  analogWrite(rena3, 0);
-  delay(400);
-  digitalWrite(rm1inp1, HIGH);
-  digitalWrite(rm1inp2, LOW);
-  analogWrite(rena1, 180);
-  delay(600);//grab
-  digitalWrite(rm1inp1, LOW);
-  digitalWrite(rm1inp2, LOW);
-  analogWrite(rena1, 0);
-  delay(400);
-  digitalWrite(rm3inp1, HIGH);
-  digitalWrite(rm3inp2, LOW);
-  analogWrite(rena3, 180);
-  delay(800);//up
-  digitalWrite(rm3inp1, LOW);
-  digitalWrite(rm3inp2, LOW);
-  analogWrite(rena3, 0);
-  delay(400);
-  digitalWrite(rm5inp1, LOW);
-  digitalWrite(rm5inp2, HIGH);
-  analogWrite(rena5, 180);
-  delay(2500);//rotate right
-  digitalWrite(rm5inp1, LOW);
-  digitalWrite(rm5inp2, LOW);
-  analogWrite(rena5, 0);
-  delay(400);
-  digitalWrite(rm1inp1, LOW);
-  digitalWrite(rm1inp2, HIGH);
-  analogWrite(rena1, 180);
-  delay(600);//open
-  digitalWrite(rm1inp1, LOW);
-  digitalWrite(rm1inp2, LOW);
-  analogWrite(rena1, 0);
-  delay(400);
-  digitalWrite(rm5inp1, HIGH);
-  digitalWrite(rm5inp2, LOW);
-  analogWrite(rena5, 180);
-  delay(2500);//rotate left
-  digitalWrite(rm5inp1, LOW);
-  digitalWrite(rm5inp2, LOW);
-  analogWrite(rena5, 0);
-  delay(400);
-}
-else
-{
-   Serial.println("Metal and plastic not Detected");
-  //digitalWrite(conveyinp1, HIGH);
-  //digitalWrite(conveyinp2, LOW);
-  analogWrite(cen, 180);
-  digitalWrite(m3inp1, LOW);
-  digitalWrite(m3inp2, LOW);
-  analogWrite(ena3, 0);              
-  digitalWrite(rm3inp1, LOW);
-  digitalWrite(rm3inp2, LOW);
-  analogWrite(ena3, 0);
-  digitalWrite(m1inp1, LOW);
-  digitalWrite(m1inp2, LOW);
-  analogWrite(ena1, 0);
-  digitalWrite(rm1inp1, LOW);
-  digitalWrite(rm1inp2, LOW);
-  analogWrite(ena1, 0);
-  digitalWrite(m5inp1, LOW);
-  digitalWrite(m5inp2, LOW);
-  analogWrite(ena5, 0);
-  digitalWrite(rm5inp1, LOW);
-  digitalWrite(rm5inp2, LOW);
-  analogWrite(ena5, 0);
-  
-}
-}
+//Project Members: Manojna,Arifa,Divesh and Surya
+
+float metalDetected;
+int monitoring;
+int metalDetection = A1;
+const int IR_Sensor= A2;
+
+//motor1 Variables
+
+ int ena1 = 11;
+ int m1inp1 = 42;
+ int m1inp2 = 43;
+
+ //robot2motor1 Variables
+ int rena1 = 10;
+ int rm1inp1 = 38;
+ int rm1inp2 = 39;
+
+ //motor3 Variables
+ int ena3 = 9;
+ int m3inp1 = 34;
+ int m3inp2 = 35;
+
+ //robot2motor3 Varibles
+ int rena3 = 6;
+ int rm3inp1 = 30;
+ int rm3inp2 = 31;
+
+ //motor5 Variables
+ int ena5 = 5;
+ int m5inp1 = 26;
+ int m5inp2 = 27;
+
+ //robot2motor5 Variables
+ int rena5 = 3;
+ int rm5inp1 = 40;
+ int rm5inp2 = 41;
+
+ //Commented out code for Conveyor as the motor outputs have low torque to drive Conveyor Chain
+ //conveyer
+ //int conveyinp1 = 22;
+ //int conveyinp2 = 23;
+ //int cen=4;
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(ena1, OUTPUT);
+  pinMode(rena1, OUTPUT);
+  pinMode(ena3, OUTPUT);
+  pinMode(rena3, OUTPUT);
+  pinMode(ena5, OUTPUT);
+  pinMode(rena5, OUTPUT);
+  pinMode(cen, OUTPUT);
+  pinMode(m1inp1, OUTPUT);
+  pinMode(m1inp2, OUTPUT);
+  pinMode(rm1inp1, OUTPUT);
+  pinMode(rm1inp2, OUTPUT);
+  pinMode(m3inp1, OUTPUT);
+  pinMode(m3inp2, OUTPUT);
+  pinMode(rm3inp1, OUTPUT);
+  pinMode(rm3inp2, OUTPUT);
+  pinMode(m5inp1, OUTPUT);
+  pinMode(m5inp2, OUTPUT);
+  pinMode(rm5inp1, OUTPUT);
+  pinMode(rm5inp2, OUTPUT);
+  pinMode(conveyinp1, OUTPUT);
+  pinMode(conveyinp2, OUTPUT);
+  pinMode(metalDetection, INPUT);
+  pinMode(13, OUTPUT);
+  pinMode(IR_Sensor,INPUT);
+  //digitalWrite(conveyinp1, HIGH);
+  //digitalWrite(conveyinp2, LOW);
+  analogWrite(cen, 180);
+}
+void loop() {
+delay(300);
+monitoring = analogRead(metalDetection);
+Serial.println(monitoring);
+//Serial.println("%");
+if (monitoring < 250)
+{
+  //digitalWrite(conveyinp1, LOW);
+  //digitalWrite(conveyinp2, LOW);
+  analogWrite(cen, 0);
+  Serial.println("Metal is Detected");
+  digitalWrite(m3inp1, LOW);
+  digitalWrite(m3inp2, HIGH);
+  analogWrite(ena3, 180);
+  delay(500);              //down
+  digitalWrite(m3inp1, LOW);
+  digitalWrite(m3inp2, LOW);
+  analogWrite(ena3, 0);
+  delay(400);
+  digitalWrite(m1inp1, HIGH);
+  digitalWrite(m1inp2, LOW);
+  analogWrite(ena1, 180);
+  delay(600);//grab
+  digitalWrite(m1inp1, LOW);
+  digitalWrite(m1inp2, LOW);
+  analogWrite(ena1, 0);
+  delay(400);
+  digitalWrite(m3inp1, HIGH);
+  digitalWrite(m3inp2, LOW);
+  analogWrite(ena3, 180);
+  delay(700);//up
+  digitalWrite(m3inp1, LOW);
+  digitalWrite(m3inp2, LOW);
+  analogWrite(ena3, 0);
+  delay(400);
+  digitalWrite(m5inp1, LOW);
+  digitalWrite(m5inp2, HIGH);
+  analogWrite(ena5, 180);
+  delay(2500);//rotate right
+  digitalWrite(m5inp1, LOW);
+  digitalWrite(m5inp2, LOW);
+  analogWrite(ena5, 0);
+  delay(400);
+  digitalWrite(m1inp1, LOW);
+  digitalWrite(m1inp2, HIGH);
+  analogWrite(ena1, 180);
+  delay(600);//open
+  digitalWrite(m1inp1, LOW);
+  digitalWrite(m1inp2, LOW);
+  analogWrite(ena1, 0);
+  delay(400);
+  digitalWrite(m5inp1, HIGH);
+  digitalWrite(m5inp2, LOW);
+  analogWrite(ena5, 180);
+  delay(2500);//rotate left
+  digitalWrite(m5inp1, LOW);
+  digitalWrite(m5inp2, LOW);
+  analogWrite(ena5, 0);
+  delay(400);
+}
+if(AnalogRead(IR_Sensor)<225)      //Check the sensor output
+{
+ Serial.println("Plastic is detected");
+ digitalWrite(conveyinp1, LOW);
+ digitalWrite(conveyinp2, LOW);
+ analogWrite(cen, 0);
+ digitalWrite(rm3inp1, LOW);
+ digitalWrite(rm3inp2, HIGH);
+ analogWrite(rena3, 180);
+ delay(700);              //down
+ digitalWrite(rm3inp1, LOW);
+ digitalWrite(rm3inp2, LOW);
+ analogWrite(rena3, 0);
+ delay(400);
+ digitalWrite(rm1inp1, HIGH);
+ digitalWrite(rm1inp2, LOW);
+ analogWrite(rena1, 180);
+ delay(600);//grab
+ digitalWrite(rm1inp1, LOW);
+ digitalWrite(rm1inp2, LOW);
+ analogWrite(rena1, 0);
+ delay(400);
+ digitalWrite(rm3inp1, HIGH);
+ digitalWrite(rm3inp2, LOW);
+ analogWrite(rena3, 180);
+ delay(800);//up
+ digitalWrite(rm3inp1, LOW);
+ digitalWrite(rm3inp2, LOW);
+ analogWrite(rena3, 0);
+ delay(400);
+ digitalWrite(rm5inp1, LOW);
+ digitalWrite(rm5inp2, HIGH);
+ analogWrite(rena5, 180);
+ delay(2500);//rotate right
+ digitalWrite(rm5inp1, LOW);
+ digitalWrite(rm5inp2, LOW);
+ analogWrite(rena5, 0);
+ delay(400);
+ digitalWrite(rm1inp1, LOW);
+ digitalWrite(rm1inp2, HIGH);
+ analogWrite(rena1, 180);
+ delay(600);//open
+ digitalWrite(rm1inp1, LOW);
+ digitalWrite(rm1inp2, LOW);
+ analogWrite(rena1, 0);
+ delay(400);
+ digitalWrite(rm5inp1, HIGH);
+ digitalWrite(rm5inp2, LOW);
+ analogWrite(rena5, 180);
+ delay(2500);//rotate left
+ digitalWrite(rm5inp1, LOW);
+ digitalWrite(rm5inp2, LOW);
+ analogWrite(rena5, 0);
+ delay(400);
+}
+else
+{
+Serial.println("Metal and plastic not Detected");
+ //digitalWrite(conveyinp1, HIGH); 
+ //digitalWrite(conveyinp2, LOW);
+  analogWrite(cen, 180);
+  digitalWrite(m3inp1, LOW);
+  digitalWrite(m3inp2, LOW);
+  analogWrite(ena3, 0);              
+  digitalWrite(rm3inp1, LOW);
+  digitalWrite(rm3inp2, LOW);
+  analogWrite(ena3, 0);
+  digitalWrite(m1inp1, LOW);
+  digitalWrite(m1inp2, LOW);
+  analogWrite(ena1, 0);
+  digitalWrite(rm1inp1, LOW);
+  digitalWrite(rm1inp2, LOW);
+  analogWrite(ena1, 0);
+  digitalWrite(m5inp1, LOW);
+  digitalWrite(m5inp2, LOW);
+  analogWrite(ena5, 0);
+  digitalWrite(rm5inp1, LOW);
+  digitalWrite(rm5inp2, LOW);
+  analogWrite(ena5, 0);
+}
+}
+
  
