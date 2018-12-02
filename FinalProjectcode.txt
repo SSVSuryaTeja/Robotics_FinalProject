@@ -36,11 +36,10 @@ const int IR_Sensor= A2;
  int rm5inp1 = 40;
  int rm5inp2 = 41;
 
- //Commented out code for Conveyor as the motor outputs have low torque to drive Conveyor Chain
  //conveyer
- //int conveyinp1 = 22;
- //int conveyinp2 = 23;
- //int cen=4;
+ int conveyinp1 = 22;
+ int conveyinp2 = 23;
+ int cen=4;
 
 void setup(){
   Serial.begin(9600);
@@ -68,8 +67,8 @@ void setup(){
   pinMode(metalDetection, INPUT);
   pinMode(13, OUTPUT);
   pinMode(IR_Sensor,INPUT);
-  //digitalWrite(conveyinp1, HIGH);
-  //digitalWrite(conveyinp2, LOW);
+  digitalWrite(conveyinp1, HIGH);
+  digitalWrite(conveyinp2, LOW);
   analogWrite(cen, 180);
 }
 void loop() {
@@ -79,8 +78,8 @@ Serial.println(monitoring);
 //Serial.println("%");
 if (monitoring < 250)
 {
-  //digitalWrite(conveyinp1, LOW);
-  //digitalWrite(conveyinp2, LOW);
+  digitalWrite(conveyinp1, LOW);
+  digitalWrite(conveyinp2, LOW);
   analogWrite(cen, 0);
   Serial.println("Metal is Detected");
   digitalWrite(m3inp1, LOW);
@@ -190,8 +189,8 @@ if(AnalogRead(IR_Sensor)<225)      //Check the sensor output
 else
 {
 Serial.println("Metal and plastic not Detected");
- //digitalWrite(conveyinp1, HIGH); 
- //digitalWrite(conveyinp2, LOW);
+  digitalWrite(conveyinp1, HIGH); 
+  digitalWrite(conveyinp2, LOW);
   analogWrite(cen, 180);
   digitalWrite(m3inp1, LOW);
   digitalWrite(m3inp2, LOW);
