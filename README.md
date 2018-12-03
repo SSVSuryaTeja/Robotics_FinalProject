@@ -17,7 +17,7 @@ Metal and Plastic detecting Robot using IR and Inductive Proximity Sensors
 - Used Regulated power supply for DC Voltage and Current.
 
 # Note:
-- We have faced issues while driving motors of conveyor belt,as the torque produced by the DC motors is insufficent to run the conveyor. This issue can be overcomed by using motors of high torque( atleast 100 RPM, it changes with the weight of the objects),but for now we have operated the conveyor belt manually.
+- We have faced issues while driving motors of conveyor belt,as the torque produced by the DC motors is insufficent to run the conveyor. This issue can be overcomed by using motors of high torque, but for now we have operated the conveyor belt manually.
 
 # Future scope:
 
